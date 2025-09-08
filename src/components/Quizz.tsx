@@ -63,12 +63,9 @@ const Quizz: React.FC<QuizzComponentProps> = ({
     }
   };
 
-  const score = Object.keys(selectedAnswers).reduce((acc, key) => {
-    const qId = Number(key);
-    return (
-      acc + (selectedAnswers[qId] === questions[qId]?.correct_answer ? 1 : 0)
-    );
-  }, 0);
+  const score = questions.filter(
+    (q) => selectedAnswers[q.id] === q.correct_answer
+  ).length;
 
   const getScoreColor = () => {
     if (score <= 1) return 'red';
